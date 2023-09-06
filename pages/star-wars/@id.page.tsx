@@ -6,10 +6,7 @@ import type { MovieDetails } from './types';
 import { render } from 'vite-plugin-ssr/abort';
 import { ErrorBlock } from '../../renderer/_error.page';
 
-export { Page };
-export { onBeforeRender };
-
-function Page({ movie }: { movie: MovieDetails }) {
+const Page = ({ movie }: { movie: MovieDetails }) => {
   return (
     <>
       <h1>{movie.title}</h1>
@@ -20,9 +17,9 @@ function Page({ movie }: { movie: MovieDetails }) {
       Producer: {movie.producer}
     </>
   );
-}
+};
 
-async function onBeforeRender(pageContext: PageContextBuiltInServer) {
+const onBeforeRender = async (pageContext: PageContextBuiltInServer) => {
   const dataUrl = `https://star-wars.brillout.com/api/films/${pageContext.routeParams.id}.json`;
   let response: Response;
   try {
@@ -49,4 +46,6 @@ async function onBeforeRender(pageContext: PageContextBuiltInServer) {
       }
     }
   };
-}
+};
+
+export { onBeforeRender, Page };

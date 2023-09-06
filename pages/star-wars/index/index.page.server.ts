@@ -2,10 +2,7 @@ import fetch from 'node-fetch';
 import { filterMovieData } from '../filterMovieData';
 import type { Movie, MovieDetails } from '../types';
 
-export { onBeforeRender };
-export { prerender };
-
-async function onBeforeRender() {
+const onBeforeRender = async () => {
   await sleep(700); // Simulate slow network
   const movies = await getStarWarsMovies();
   return {
@@ -19,7 +16,7 @@ async function onBeforeRender() {
       documentProps: { title: getTitle(movies) }
     }
   };
-}
+};
 
 async function getStarWarsMovies(): Promise<MovieDetails[]> {
   const response = await fetch('https://star-wars.brillout.com/api/films.json');
@@ -38,7 +35,7 @@ function filterMoviesData(movies: MovieDetails[]): Movie[] {
   });
 }
 
-async function prerender() {
+const prerender = async () => {
   const movies = await getStarWarsMovies();
 
   return [
@@ -71,12 +68,14 @@ async function prerender() {
       };
     })
   ];
-}
+};
 
-function getTitle(movies: Movie[] | MovieDetails[]): string {
+const getTitle = (movies: Movie[] | MovieDetails[]): string => {
   return `${movies.length} Star Wars Movies`;
-}
+};
 
-function sleep(milliseconds: number): Promise<void> {
+const sleep = (milliseconds: number): Promise<void> => {
   return new Promise((r) => setTimeout(r, milliseconds));
-}
+};
+
+export { onBeforeRender, prerender };

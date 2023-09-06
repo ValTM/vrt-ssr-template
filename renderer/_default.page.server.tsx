@@ -5,12 +5,9 @@ import { PageShell } from './PageShell';
 import { getPageTitle } from './getPageTitle';
 import type { PageContextServer } from './types';
 
-export { render };
-export { passToClient };
-
 const passToClient = ['pageProps', 'documentProps', 'someAsyncProps'];
 
-async function render(pageContext: PageContextServer) {
+const render = async (pageContext: PageContextServer) => {
   const { Page, pageProps } = pageContext;
 
   const stream = await renderToStream(
@@ -42,4 +39,6 @@ async function render(pageContext: PageContextServer) {
       };
     }
   };
-}
+};
+
+export { passToClient, render };

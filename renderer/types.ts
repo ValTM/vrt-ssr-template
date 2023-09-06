@@ -1,8 +1,3 @@
-export type { PageContextServer };
-export type { PageContextClient };
-export type { PageContext };
-export type { PageProps };
-
 import type { PageContextBuiltInClientWithClientRouting as PageContextBuiltInClient, PageContextBuiltInServer } from 'vite-plugin-ssr/types';
 
 type Page = (pageProps: PageProps) => React.ReactElement
@@ -23,5 +18,6 @@ export type PageContextCustom = {
 
 type PageContextServer = PageContextBuiltInServer<Page> & PageContextCustom
 type PageContextClient = PageContextBuiltInClient<Page> & PageContextCustom
-
 type PageContext = PageContextClient | PageContextServer
+
+export type { PageContext, PageContextClient, PageContextServer, PageProps };

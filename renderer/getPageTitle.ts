@@ -1,9 +1,8 @@
-export { getPageTitle };
-
-function getPageTitle(pageContext: {
+const getPageTitle = (pageContext: {
   exports: { documentProps?: { title: string } }
   documentProps?: { title: string }
-}): string {
+}): string => {
+  // noinspection UnnecessaryLocalVariableJS
   const title =
     // For static titles (defined in the `export { documentProps }` of the page's `.page.js`)
     (pageContext.exports.documentProps || {}).title ||
@@ -11,4 +10,6 @@ function getPageTitle(pageContext: {
     (pageContext.documentProps || {}).title ||
     'Demo';
   return title;
-}
+};
+
+export { getPageTitle };
