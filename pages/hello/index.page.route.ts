@@ -1,6 +1,6 @@
 import { resolveRoute } from 'vite-plugin-ssr/routing';
 import { render } from 'vite-plugin-ssr/abort';
-import { ErrorBlock } from '../../renderer/_error.page';
+import { ErrorDetails } from '../../renderer/_error.page';
 
 // Route Functions enables advanced routing logic
 export default (pageContext: { urlPathname: string }) => {
@@ -15,7 +15,7 @@ export default (pageContext: { urlPathname: string }) => {
 export const guard = async (pageContext: { urlPathname: string }) => {
   if (pageContext.urlPathname === '/hello/forbidden') {
     await sleep(2 * 1000); // Unlike Route Functions, guard() can be async
-    const error: ErrorBlock = { errorDescription: 'This page is forbidden.', errorTitle: 'Forbidden.' };
+    const error: ErrorDetails = { errorDescription: 'This page is forbidden.', errorTitle: 'Forbidden.' };
     throw render(403, error);
   }
 };

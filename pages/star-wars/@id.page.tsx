@@ -4,7 +4,7 @@ import { filterMovieData } from './filterMovieData';
 import type { PageContextBuiltInServer } from 'vite-plugin-ssr/types';
 import type { MovieDetails } from './types';
 import { render } from 'vite-plugin-ssr/abort';
-import { ErrorBlock } from '../../renderer/_error.page';
+import { ErrorDetails } from '../../renderer/_error.page';
 
 const Page = ({ movie }: { movie: MovieDetails }) => {
   return (
@@ -25,7 +25,7 @@ const onBeforeRender = async (pageContext: PageContextBuiltInServer) => {
   try {
     response = await fetch(dataUrl);
   } catch (err) {
-    throw render(404, { errorTitle: 'Not found', errorDescription: `Couldn't fetch data ${dataUrl}` } as ErrorBlock);
+    throw render(404, { errorTitle: 'Not found', errorDescription: `Couldn't fetch data ${dataUrl}` } as ErrorDetails);
   }
   let movie = (await response.json()) as MovieDetails;
 
