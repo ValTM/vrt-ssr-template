@@ -1,41 +1,42 @@
-import React from 'react'
-import fetch from 'cross-fetch'
-import { filterMovieData } from './filterMovieData'
-import type { PageContextBuiltInServer } from 'vite-plugin-ssr/types'
-import type { MovieDetails } from './types'
-import { RenderErrorPage } from 'vite-plugin-ssr/RenderErrorPage'
+import React from 'react';
+import fetch from 'cross-fetch';
+import { filterMovieData } from './filterMovieData';
+import type { PageContextBuiltInServer } from 'vite-plugin-ssr/types';
+import type { MovieDetails } from './types';
+import { render } from 'vite-plugin-ssr/abort';
+import { ErrorBlock } from '../../renderer/_error.page';
 
-export { Page }
-export { onBeforeRender }
+export { Page };
+export { onBeforeRender };
 
 function Page({ movie }: { movie: MovieDetails }) {
   return (
     <>
       <h1>{movie.title}</h1>
       Release Date: {movie.release_date}
-      <br />
+      <br/>
       Director: {movie.director}
-      <br />
+      <br/>
       Producer: {movie.producer}
     </>
-  )
+  );
 }
 
 async function onBeforeRender(pageContext: PageContextBuiltInServer) {
-  const dataUrl = `https://star-wars.brillout.com/api/films/${pageContext.routeParams.id}.json`
-  let response: Response
+  const dataUrl = `https://star-wars.brillout.com/api/films/${pageContext.routeParams.id}.json`;
+  let response: Response;
   try {
-    response = await fetch(dataUrl)
+    response = await fetch(dataUrl);
   } catch (err) {
-    throw RenderErrorPage({ pageContext: { pageProps: { errorDescription: `Couldn't fetch data ${dataUrl}` } } })
+    throw render(404, { errorTitle: 'Not found', errorDescription: `Couldn't fetch data ${dataUrl}` } as ErrorBlock);
   }
-  let movie = (await response.json()) as MovieDetails
+  let movie = (await response.json()) as MovieDetails;
 
   // We remove data we don't need because we pass `pageContext.movie` to
   // the client; we want to minimize what is sent over the network.
-  movie = filterMovieData(movie)
+  movie = filterMovieData(movie);
 
-  const { title } = movie
+  const { title } = movie;
 
   return {
     pageContext: {
@@ -47,5 +48,5 @@ async function onBeforeRender(pageContext: PageContextBuiltInServer) {
         title
       }
     }
-  }
+  };
 }

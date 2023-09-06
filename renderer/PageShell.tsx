@@ -1,10 +1,10 @@
-import React from 'react'
-import logoUrl from './logo.svg'
-import { PageContextProvider } from './usePageContext'
-import { Link } from './Link'
-import type { PageContext } from './types'
+import React from 'react';
+import logoUrl from './logo.svg';
+import { PageContextProvider } from './usePageContext';
+import { Link } from './Link';
+import type { PageContext } from './types';
 
-export { PageShell }
+export { PageShell };
 
 function PageShell({ pageContext, children }: { pageContext: PageContext; children: React.ReactNode }) {
   return (
@@ -12,7 +12,7 @@ function PageShell({ pageContext, children }: { pageContext: PageContext; childr
       <PageContextProvider pageContext={pageContext}>
         <Layout>
           <Sidebar>
-            <Logo />
+            <Logo/>
             <Link href="/">Welcome</Link>
             <Link href="/markdown">Markdown</Link>
             <Link href="/star-wars">Data Fetching</Link>
@@ -22,7 +22,7 @@ function PageShell({ pageContext, children }: { pageContext: PageContext; childr
         </Layout>
       </PageContextProvider>
     </React.StrictMode>
-  )
+  );
 }
 
 function Layout({ children }: { children: React.ReactNode }) {
@@ -36,7 +36,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     >
       {children}
     </div>
-  )
+  );
 }
 
 function Sidebar({ children }: { children: React.ReactNode }) {
@@ -54,7 +54,7 @@ function Sidebar({ children }: { children: React.ReactNode }) {
     >
       {children}
     </div>
-  )
+  );
 }
 
 function Content({ children }: { children: React.ReactNode }) {
@@ -71,7 +71,7 @@ function Content({ children }: { children: React.ReactNode }) {
         {children}
       </div>
     </div>
-  )
+  );
 }
 
 function Logo() {
@@ -83,8 +83,8 @@ function Logo() {
       }}
     >
       <a href="/">
-        <img src={logoUrl} height={64} width={64} />
+        <img src={logoUrl} height={64} width={64}/>
       </a>
     </div>
-  )
+  );
 }

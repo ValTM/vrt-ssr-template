@@ -1,4 +1,4 @@
-export { getPageTitle }
+export { getPageTitle };
 
 function getPageTitle(pageContext: {
   exports: { documentProps?: { title: string } }
@@ -9,6 +9,6 @@ function getPageTitle(pageContext: {
     (pageContext.exports.documentProps || {}).title ||
     // For dynamic tiles (defined in the `export addContextProps()` of the page's `.page.server.js`)
     (pageContext.documentProps || {}).title ||
-    'Demo'
-  return title
+    'Demo';
+  return title;
 }

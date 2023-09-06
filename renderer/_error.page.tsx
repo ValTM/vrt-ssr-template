@@ -1,27 +1,21 @@
-import React from 'react'
+import React from 'react';
+import { usePageContext } from './usePageContext';
 
-export { Page }
+export { Page };
+export type ErrorBlock = {
+  errorTitle: string
+  errorDescription: string;
+}
 
-function Page({
-  is404,
-  errorTitle,
-  errorDescription
-}: {
-  is404: boolean
-  errorTitle?: string
-  errorDescription?: string
-}) {
-  if (is404) {
-    errorTitle ??= '404 Page Not Found'
-    errorDescription ??= 'This page could not be found.'
-  } else {
-    errorTitle ??= '500 Internal Error'
-    errorDescription ??= 'Something went wrong.'
-  }
+function Page() {
+  const pageContext = usePageContext();
+  const { abortReason, abortStatusCode } = pageContext;
+  const { errorTitle, errorDescription } = abortReason as ErrorBlock;
+
   return (
     <>
       <h1>{errorTitle}</h1>
       <p>{errorDescription}</p>
     </>
-  )
+  );
 }
