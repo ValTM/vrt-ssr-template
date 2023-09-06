@@ -6,9 +6,11 @@ export type ErrorBlock = {
   errorDescription: string;
 }
 
+const DefaultError: ErrorBlock = { errorTitle: 'Error', errorDescription: 'Someething went wrong' };
+
 const Page = () => {
   const pageContext = usePageContext();
-  const { abortReason, abortStatusCode } = pageContext;
+  const { abortReason = DefaultError, abortStatusCode } = pageContext;
   const { errorTitle, errorDescription } = abortReason as ErrorBlock;
 
   return (
