@@ -1,4 +1,4 @@
-React example showcasing many features.
+Vite + React + Tailwind + SSR 
 
 Features:
 
@@ -14,9 +14,4 @@ Features:
 - HTML streaming
 - Page Transition Loading Animation
 
-```bash
-git clone git@github.com:brillout/vite-plugin-ssr
-cd vite-plugin-ssr/examples/react-full/
-npm install
-npm run dev
-```
+Fork of brillout/vite-plugin-ssr/examples/react-full/
