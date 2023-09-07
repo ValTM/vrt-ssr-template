@@ -5,7 +5,7 @@ import { Counter } from '../components/Counter';
 const Page = () => {
   return (
     <>
-      <h1>
+      <h1 className="text-red-500 font-bold text-xl">
         Welcome to <code>vite-plugin-ssr</code>
       </h1>
       This page is:
